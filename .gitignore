@@ -154,4 +154,6 @@ gradle-app.setting
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-/.idea/
+# IntelliJ IDEA specific files
+.idea/
+*.iml
