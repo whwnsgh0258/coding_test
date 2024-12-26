@@ -7,21 +7,19 @@ class Solution {
     int opStart = convertToSeconds(op_start);
     int opEnd = convertToSeconds(op_end);
 
-    if (position >= opStart && position <= opEnd) {
-      position = opEnd;
-    }
-
+    
     for (String command : commands) {
+        position = getPosition(position, opStart, opEnd);
       if (command.equals("prev")) {
+          if (position >= opStart && position <= opEnd) {
+        position = opEnd;
+      }
         position = Math.max(0, position - 10);
       } else if (command.equals("next")) {
         position = Math.min(videoLength, position + 10);
       }
 
-      // 명령 수행 후 위치가 오프닝 구간인지 확인
-      if (position >= opStart && position <= opEnd) {
-        position = opEnd;
-      }
+      position = getPosition(position, opStart, opEnd);
     }
 
     // 결과를 "mm:ss" 형식으로 변환하여 반환
@@ -36,6 +34,13 @@ class Solution {
         int seconds = Integer.parseInt(parts[1]);
         return minutes * 60 + seconds;
     }
+    
+    private static int getPosition(int position, int opStart, int opEnd) {
+    if (position >= opStart && position <= opEnd) {
+      position = opEnd;
+    }
+    return position;
+  }
 
     // Convert seconds to mm:ss
     private static String convertToTimeFormat(int seconds) {
