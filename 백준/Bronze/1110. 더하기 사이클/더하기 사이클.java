@@ -1,39 +1,25 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
 
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
+  public static void main(String[] args) throws IOException {
+    BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
-    int n = sc.nextInt();
+    int n = Integer.parseInt(bf.readLine());
+    int o = n;
     int result = 0;
-    int m = ((n / 10) + n % 10) + (n % 10) * 10;
     if (n == 0) {
       System.out.println(1);
       return;
     }
-    List<Integer> list = new ArrayList<>();
-    if (n != m && (n / 10) + n % 10 < 10) {
+
+    do {
+      n = ((n / 10) + n % 10) % 10 + (n % 10) * 10;
       result++;
-      list.add(m);
-    } else if (n != m && (n / 10) + n % 10 >= 10) {
-      result++;
-      m = (((n / 10) + n % 10) - 10) + (n % 10) * 10;
-      list.add(m);
-    }
-    while(list.get(list.size()-1) != n) {
-      if ((m / 10) + m % 10 < 10) {
-        result++;
-        m = ((m / 10) + m % 10) + (m % 10) * 10;
-        list.add(m);
-      } else if ((m / 10) + m % 10 >= 10) {
-        result++;
-        m = (((m / 10) + m % 10) - 10) + (m % 10) * 10;
-        list.add(m);
-      }
-    }
+    } while (o != n);
+
     System.out.println(result);
   }
 }
