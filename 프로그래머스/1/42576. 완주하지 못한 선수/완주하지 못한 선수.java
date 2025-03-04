@@ -1,12 +1,12 @@
 import java.util.*;
 class Solution {
     public String solution(String[] participant, String[] completion) {
-        String[] arrP = Arrays.stream(participant).sorted().toArray(String[]::new);
-        String[] arrC = Arrays.stream(completion).sorted().toArray(String[]::new);
+        Arrays.sort(participant);
+        Arrays.sort(completion);
         int idx = 0;
-        for (int i = 0; i < arrP.length; i++) {
-            if (i < arrP.length - 1) {
-                if (!Objects.equals(arrP[i], arrC[i])) {
+        for (int i = 0; i < participant.length; i++) {
+            if (i < participant.length - 1) {
+                if (!Objects.equals(participant[i], completion[i])) {
                     idx = i;
                     break;
                 }
@@ -14,6 +14,6 @@ class Solution {
                 idx = i;
             }
         }
-        return arrP[idx];
+        return participant[idx];
     }
 }
